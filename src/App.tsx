@@ -42,7 +42,7 @@ function App() {
   }, [preferences])
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}terms.json`)
+    fetch(`${import.meta.env.BASE_URL}terms.json`, { cache: 'no-store' })
       .then((response) => {
         if (!response.ok) throw new Error('Could not load the word store.')
         return response.json() as Promise<Britishism[]>
