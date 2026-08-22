@@ -1,0 +1,15 @@
+{
+  "name": "Tongue & Cheek",
+  "short_name": "Tongue & Cheek",
+  "description": "British slang, sayings and pronunciation—translated for American ears.",
+  "start_url": "/tongue-and-cheek/",
+  "scope": "/tongue-and-cheek/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0d0f15",
+  "theme_color": "#11131a",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" },
+    { "src": "apple-touch-icon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
