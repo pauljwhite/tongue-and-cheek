@@ -113,6 +113,15 @@ main { width: var(--page); margin: 0 auto; padding: 68px 0 90px; min-height: cal
 .entry-card--featured { min-height: 410px; padding: 34px; border-radius: 34px; box-shadow: var(--rim), 0 40px 100px rgba(0,0,0,.38); }
 .entry-card--featured strong { margin-top: 48px; font-size: clamp(48px, 5.3vw, 70px); }
 .entry-card--featured .entry-card__meaning { font-size: 17px; }
+.featured-entry { min-width: 0; }
+.featured-entry .entry-card--featured { animation: daily-in .24s ease; }
+.daily-refresh { width: 100%; min-height: 52px; margin-top: 12px; padding: 8px 16px; border-radius: 17px; color: var(--text); display: flex; align-items: center; justify-content: center; gap: 11px; cursor: pointer; transition: transform .2s ease, border-color .2s ease; }
+.daily-refresh:hover { transform: translateY(-2px); border-color: var(--accent-line); }
+.daily-refresh > svg { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.daily-refresh > span { display: grid; gap: 1px; text-align: left; }
+.daily-refresh strong { font-size: 13px; }
+.daily-refresh small { color: var(--muted); font-size: 10px; }
+@keyframes daily-in { from { opacity: .55; transform: translateY(5px); } }
 .skeleton { background: linear-gradient(100deg,var(--glass),rgba(255,255,255,.06),var(--glass)); background-size: 240% 100%; animation: pulse 1.4s infinite; }
 @keyframes pulse { to { background-position: -140% 0; } }
 

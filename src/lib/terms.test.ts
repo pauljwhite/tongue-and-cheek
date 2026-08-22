@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Britishism } from '../types'
-import { dailyEntry, searchEntries, slugify, validateEntry } from './terms'
+import { dailyEntry, refreshedDailyEntry, searchEntries, slugify, validateEntry } from './terms'
 
 const entry = (id: string, term = id): Britishism => ({
   id, term, kind: 'slang', meaning: `Meaning of ${term}`, americanEquivalent: 'Equivalent', example: 'Example',
@@ -16,6 +16,15 @@ describe('dailyEntry', () => {
   it('skips entries excluded from the rotation', () => {
     const excluded = { ...entry('excluded'), dailyEligible: false }
     expect(dailyEntry([excluded], new Date())).toBeUndefined()
+  })
+
+  it('refreshes to another eligible entry without immediately repeating', () => {
+    const entries = [entry('a'), entry('b'), entry('c')]
+    expect(refreshedDailyEntry(entries, 'a', () => 0)?.id).toBe('b')
+  })
+
+  it('falls back safely when only one entry is eligible', () => {
+    expect(refreshedDailyEntry([entry('only')], 'only')?.id).toBe('only')
   })
 })
 

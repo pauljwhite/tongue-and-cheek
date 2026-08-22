@@ -7,7 +7,7 @@ import { Icon } from './components/Icon'
 import { InstallGuide } from './components/InstallGuide'
 import { Settings } from './components/Settings'
 import { applyPreferences, loadPreferences, type Preferences } from './lib/preferences'
-import { dailyEntry, kindLabels, searchEntries } from './lib/terms'
+import { dailyEntry, kindLabels, refreshedDailyEntry, searchEntries } from './lib/terms'
 import type { AppSection, Britishism, EntryKind } from './types'
 import './styles.css'
 
@@ -29,8 +29,10 @@ function App() {
   const [showSettings, setShowSettings] = useState(false)
   const [showInstall, setShowInstall] = useState(false)
   const [visibleCount, setVisibleCount] = useState(RESULTS_PAGE_SIZE)
+  const [refreshedToday, setRefreshedToday] = useState<Britishism>()
   const [preferences, setPreferences] = useState<Preferences>(loadPreferences)
-  const today = useMemo(() => dailyEntry(entries), [entries])
+  const scheduledToday = useMemo(() => dailyEntry(entries), [entries])
+  const today = refreshedToday ?? scheduledToday
   const results = useMemo(() => searchEntries(entries, query, kind), [entries, query, kind])
   const visibleResults = results.slice(0, visibleCount)
 
@@ -106,7 +108,7 @@ function App() {
               <h1>A little less<br /><span>lost in translation.</span></h1>
               <p>One gloriously British expression a day, decoded for American ears.</p>
             </div>
-            {loading ? <div className="entry-card entry-card--featured glass-card skeleton" aria-label="Loading today’s term" /> : today && <EntryCard entry={today} onOpen={() => openEntry(today)} featured />}
+            {loading ? <div className="entry-card entry-card--featured glass-card skeleton" aria-label="Loading today’s term" /> : today && <div className="featured-entry" aria-live="polite"><EntryCard key={today.id} entry={today} onOpen={() => openEntry(today)} featured /><button className="daily-refresh glass-card" onClick={() => setRefreshedToday(refreshedDailyEntry(entries, today.id))}><Icon name="refresh" /><span><strong>Another, please</strong><small>Show me a different Britishism</small></span></button></div>}
 
             <div className="quick-actions">
               <button className="glass-card" onClick={() => switchSection('browse')}><span className="action-orb"><Icon name="search" /></span><span><strong>Find a Britishism</strong><small>Search all {entries.length} translations</small></span><Icon name="chevron" /></button>

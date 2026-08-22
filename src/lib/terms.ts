@@ -17,6 +17,12 @@ export function dailyEntry(entries: Britishism[], date = new Date()): Britishism
   return eligible[dayNumber(date) % eligible.length]
 }
 
+export function refreshedDailyEntry(entries: Britishism[], currentId?: string, random = Math.random): Britishism | undefined {
+  const eligible = entries.filter((entry) => entry.dailyEligible && entry.id !== currentId)
+  if (!eligible.length) return entries.find((entry) => entry.dailyEligible)
+  return eligible[Math.floor(random() * eligible.length)]
+}
+
 export function searchEntries(entries: Britishism[], query: string, kind: EntryKind | 'all'): Britishism[] {
   const needle = query.trim().toLocaleLowerCase('en-GB')
   return entries

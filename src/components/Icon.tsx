@@ -1,6 +1,6 @@
 import type { SVGProps } from 'react'
 
-export type IconName = 'book' | 'calendar' | 'search' | 'plus' | 'settings' | 'share' | 'volume' | 'close' | 'phone' | 'check' | 'external' | 'lock' | 'chevron'
+export type IconName = 'book' | 'calendar' | 'search' | 'plus' | 'settings' | 'share' | 'volume' | 'close' | 'phone' | 'check' | 'external' | 'lock' | 'chevron' | 'refresh'
 
 const paths: Record<IconName, React.ReactNode> = {
   book: <><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5z"/></>,
@@ -16,6 +16,7 @@ const paths: Record<IconName, React.ReactNode> = {
   external: <><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></>,
   lock: <><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></>,
   chevron: <path d="m9 18 6-6-6-6"/>,
+  refresh: <><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></>,
 }
 
 export function Icon({ name, ...props }: { name: IconName } & SVGProps<SVGSVGElement>) {
