@@ -151,6 +151,9 @@ main { width: var(--page); margin: 0 auto; padding: 68px 0 90px; min-height: cal
 .filter-row button.is-active { color: var(--text); border-color: var(--accent-line); background: var(--accent-soft); }
 .results-heading { margin: 32px 0 14px; color: var(--muted); font-size: 13px; }
 .results-heading strong { color: var(--text); }
+.load-more { display: flex; justify-content: center; padding-top: 28px; }
+.load-more button { min-width: 210px; }
+.load-more span { color: var(--muted); font-size: 11px; font-weight: 600; }
 .empty-state { max-width: 560px; margin: 40px auto; padding: 48px; border-radius: 30px; text-align: center; }
 .empty-state .brand-mark { margin: 0 auto 20px; }
 .empty-state h2 { font-family: "DM Serif Display", Georgia, serif; font-size: 38px; font-weight: 400; margin-bottom: 8px; }

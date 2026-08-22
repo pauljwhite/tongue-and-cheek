@@ -17,6 +17,8 @@ const navItems: { section: AppSection; label: string; icon: 'calendar' | 'book' 
   { section: 'add', label: 'Add', icon: 'plus' },
 ]
 
+const RESULTS_PAGE_SIZE = 48
+
 function App() {
   const [entries, setEntries] = useState<Britishism[]>([])
   const [loading, setLoading] = useState(true)
@@ -26,9 +28,11 @@ function App() {
   const [selected, setSelected] = useState<Britishism>()
   const [showSettings, setShowSettings] = useState(false)
   const [showInstall, setShowInstall] = useState(false)
+  const [visibleCount, setVisibleCount] = useState(RESULTS_PAGE_SIZE)
   const [preferences, setPreferences] = useState<Preferences>(loadPreferences)
   const today = useMemo(() => dailyEntry(entries), [entries])
   const results = useMemo(() => searchEntries(entries, query, kind), [entries, query, kind])
+  const visibleResults = results.slice(0, visibleCount)
 
   useEffect(() => {
     applyPreferences(preferences)
@@ -122,14 +126,14 @@ function App() {
           <section className="browse-layout">
             <div className="section-intro"><p className="eyebrow">The whole caboodle</p><h1>British, from A to Zed.</h1><p>Search by phrase, meaning, American equivalent, region, or general level of cheek.</p></div>
             <div className="search-panel glass-card">
-              <label className="search-box"><Icon name="search" /><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try ‘exhausted’ or ‘dodgy’" aria-label="Search Britishisms" />{query && <button onClick={() => setQuery('')} aria-label="Clear search"><Icon name="close" /></button>}</label>
+              <label className="search-box"><Icon name="search" /><input type="search" value={query} onChange={(event) => { setQuery(event.target.value); setVisibleCount(RESULTS_PAGE_SIZE) }} placeholder="Try ‘exhausted’ or ‘dodgy’" aria-label="Search Britishisms" />{query && <button onClick={() => { setQuery(''); setVisibleCount(RESULTS_PAGE_SIZE) }} aria-label="Clear search"><Icon name="close" /></button>}</label>
               <div className="filter-row" aria-label="Filter by type">
-                <button className={kind === 'all' ? 'is-active' : ''} onClick={() => setKind('all')}>Everything</button>
-                {(Object.keys(kindLabels) as EntryKind[]).map((key) => <button key={key} className={kind === key ? 'is-active' : ''} onClick={() => setKind(key)}>{kindLabels[key]}</button>)}
+                <button className={kind === 'all' ? 'is-active' : ''} onClick={() => { setKind('all'); setVisibleCount(RESULTS_PAGE_SIZE) }}>Everything</button>
+                {(Object.keys(kindLabels) as EntryKind[]).map((key) => <button key={key} className={kind === key ? 'is-active' : ''} onClick={() => { setKind(key); setVisibleCount(RESULTS_PAGE_SIZE) }}>{kindLabels[key]}</button>)}
               </div>
             </div>
             <div className="results-heading"><strong>{results.length}</strong> {results.length === 1 ? 'translation' : 'translations'}</div>
-            {results.length ? <div className="entry-grid">{results.map((entry) => <EntryCard key={entry.id} entry={entry} onOpen={() => openEntry(entry)} />)}</div> : <div className="empty-state glass-card"><BrandMark /><h2>Not a sausage.</h2><p>Nothing matched that search. Try another word—or add the phrase yourself.</p><button className="primary-button" onClick={() => switchSection('add')}><Icon name="plus" /> Add it</button></div>}
+            {results.length ? <><div className="entry-grid">{visibleResults.map((entry) => <EntryCard key={entry.id} entry={entry} onOpen={() => openEntry(entry)} />)}</div>{visibleCount < results.length && <div className="load-more"><button className="secondary-button" onClick={() => setVisibleCount((count) => count + RESULTS_PAGE_SIZE)}>Show 48 more <span>{results.length - visibleCount} left</span></button></div>}</> : <div className="empty-state glass-card"><BrandMark /><h2>Not a sausage.</h2><p>Nothing matched that search. Try another word—or add the phrase yourself.</p><button className="primary-button" onClick={() => switchSection('add')}><Icon name="plus" /> Add it</button></div>}
           </section>
         )}
 
