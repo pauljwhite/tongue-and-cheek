@@ -494,6 +494,19 @@
     "dailyEligible": true
   },
   {
+    "id": "oxfordshire",
+    "term": "Oxfordshire",
+    "kind": "pronunciation",
+    "meaning": "The English county. In British place names, the ‘-shire’ ending is softened to ‘sheer’ or ‘shuh’ rather than rhyming with ‘fire’.",
+    "americanEquivalent": "Oxfordshire",
+    "example": "They live just outside Oxford, in Oxfordshire.",
+    "pronunciation": { "ipa": "/ˈɒks.fəd.ʃə/", "respelling": "OKS-fuhd-sheer—not Oxford-shire" },
+    "regions": ["Oxfordshire", "UK-wide"],
+    "tone": "ordinary",
+    "tags": ["place name", "county", "shire"],
+    "dailyEligible": true
+  },
+  {
     "id": "vitamin",
     "term": "Vitamin",
     "kind": "pronunciation",
