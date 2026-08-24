@@ -142,7 +142,7 @@ function App() {
         {section === 'add' && <Editor entries={entries} onSaved={(entry) => setEntries((current) => [...current, entry])} />}
       </main>
 
-      <footer><BrandMark compact /><p><strong>Tongue &amp; Cheek</strong><span>Made in Britain. Decoded everywhere.</span></p><button onClick={() => setShowInstall(true)}>iPhone install guide</button></footer>
+      <footer><BrandMark compact /><p><strong>Tongue &amp; Cheek</strong><span>Designed, built and lightly faffed with by Paul White.</span></p><button onClick={() => setShowInstall(true)}>iPhone install guide</button></footer>
 
       <nav className="mobile-nav" aria-label="Primary">
         {navItems.map((item) => <button key={item.section} className={section === item.section ? 'is-active' : ''} onClick={() => switchSection(item.section)}><Icon name={item.icon} /><span>{item.label}</span></button>)}
