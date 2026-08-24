@@ -104,11 +104,13 @@ function App() {
         {section === 'today' && (
           <section className="today-layout">
             <div className="hero-copy">
-              <p className="eyebrow">Word of the day</p>
               <h1>A little less<br /><span>lost in translation.</span></h1>
               <p>One gloriously British expression a day, decoded for American ears.</p>
             </div>
-            {loading ? <div className="entry-card entry-card--featured glass-card skeleton" aria-label="Loading today’s term" /> : today && <div className="featured-entry" aria-live="polite"><EntryCard key={today.id} entry={today} onOpen={() => openEntry(today)} featured /><button className="daily-refresh glass-card" onClick={() => setRefreshedToday(refreshedDailyEntry(entries, today.id))}><Icon name="refresh" /><span><strong>Another, please</strong><small>Show me a different Britishism</small></span></button></div>}
+            <div className="featured-entry" aria-live="polite">
+              <p className="eyebrow">Today’s Britishism</p>
+              {loading ? <div className="entry-card entry-card--featured glass-card skeleton" aria-label="Loading today’s term" /> : today && <><EntryCard key={today.id} entry={today} onOpen={() => openEntry(today)} featured /><button className="daily-refresh glass-card" onClick={() => setRefreshedToday(refreshedDailyEntry(entries, today.id))}><Icon name="refresh" /><span><strong>Another, please</strong><small>Show me a different Britishism</small></span></button></>}
+            </div>
 
             <div className="quick-actions">
               <button className="glass-card" onClick={() => switchSection('browse')}><span className="action-orb"><Icon name="search" /></span><span><strong>Find a Britishism</strong><small>Search all {entries.length} translations</small></span><Icon name="chevron" /></button>

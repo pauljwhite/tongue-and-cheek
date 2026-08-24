@@ -114,6 +114,7 @@ main { width: var(--page); margin: 0 auto; padding: 68px 0 90px; min-height: cal
 .entry-card--featured strong { margin-top: 48px; font-size: clamp(48px, 5.3vw, 70px); }
 .entry-card--featured .entry-card__meaning { font-size: 17px; }
 .featured-entry { min-width: 0; }
+.featured-entry > .eyebrow { margin-bottom: 14px; }
 .featured-entry .entry-card--featured { animation: daily-in .24s ease; }
 .daily-refresh { width: 100%; min-height: 52px; margin-top: 12px; padding: 8px 16px; border-radius: 17px; color: var(--text); display: flex; align-items: center; justify-content: center; gap: 11px; cursor: pointer; transition: transform .2s ease, border-color .2s ease; }
 .daily-refresh:hover { transform: translateY(-2px); border-color: var(--accent-line); }
@@ -281,7 +282,6 @@ footer button { margin-left: auto; border: 0; background: none; color: var(--mut
   .brand small { font-size: 8px; }
   .desktop-nav, .topbar__settings { display: none; }
   .hero-copy { padding: 24px 3px 30px; }
-  .hero-copy .eyebrow { margin-bottom: 12px; }
   .hero-copy h1 { margin-bottom: 18px; font-size: clamp(46px,14vw,64px); line-height: .97; }
   .hero-copy > p:last-child { font-size: 15px; line-height: 1.5; }
   .entry-card--featured { min-height: 350px; padding: 26px; border-radius: 28px; }
