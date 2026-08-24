@@ -31,6 +31,8 @@ The expansion was cross-checked against:
 - [Newcastle University's Geordie guide](https://belong.ncl.ac.uk/blog/geordie-dictionary-guide)
 - [Ulster-Scots Agency dictionary](https://www.ulsterscotsagency.com/weans/activities/dictionary/index.html)
 - [Museum Wales language resources](https://museum.wales/blog/1222/English-in-Wales/)
+- [London Museum's guide to Cockneys and rhyming slang](https://www.londonmuseum.org.uk/collections/london-stories/cockneys/)
+- [The Open University's explanation of Cockney rhyming slang](https://www.open.edu/openlearn/mod/oucontent/view.php?id=48215&section=3.2.1)
 - [British Council pronunciation practice](https://premierskillsenglish.britishcouncil.org/sites/default/files/learning/4701/downloads/perfectpronunciation-consonantsounds-worksheet.pdf) and [Jason Anderson's place-name guide](https://www.jasonanderson.org.uk/downloads/how-to-pronounce-english-place-names.pdf)
 
 ## iPhone Home Screen
