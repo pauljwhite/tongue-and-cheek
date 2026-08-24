@@ -111,10 +111,10 @@ main { width: var(--page); margin: 0 auto; padding: 68px 0 90px; min-height: cal
 .entry-card__more { display: inline-flex; align-items: center; gap: 3px; margin-top: auto; padding-top: 22px; color: var(--muted); font-size: 12px; font-weight: 700; }
 .entry-card__more svg, .section-heading button svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .entry-card--featured { min-height: 410px; padding: 34px; border-radius: 34px; box-shadow: var(--rim), 0 40px 100px rgba(0,0,0,.38); }
-.entry-card--featured strong { margin-top: 48px; font-size: clamp(48px, 5.3vw, 70px); }
+.entry-card__daily-label { margin-bottom: 18px; color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.entry-card--featured strong { margin-top: 34px; font-size: clamp(48px, 5.3vw, 70px); }
 .entry-card--featured .entry-card__meaning { font-size: 17px; }
 .featured-entry { min-width: 0; }
-.featured-entry > .eyebrow { margin-bottom: 14px; }
 .featured-entry .entry-card--featured { animation: daily-in .24s ease; }
 .daily-refresh { width: 100%; min-height: 52px; margin-top: 12px; padding: 8px 16px; border-radius: 17px; color: var(--text); display: flex; align-items: center; justify-content: center; gap: 11px; cursor: pointer; transition: transform .2s ease, border-color .2s ease; }
 .daily-refresh:hover { transform: translateY(-2px); border-color: var(--accent-line); }

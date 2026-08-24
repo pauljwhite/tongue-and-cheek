@@ -5,6 +5,7 @@ import type { Britishism } from '../types'
 export function EntryCard({ entry, onOpen, featured = false }: { entry: Britishism; onOpen: () => void; featured?: boolean }) {
   return (
     <button className={`entry-card glass-card ${featured ? 'entry-card--featured' : ''}`} onClick={onOpen}>
+      {featured && <span className="entry-card__daily-label">Today’s Britishism</span>}
       <span className="entry-card__topline">
         <span className={`kind kind--${entry.kind}`}>{kindLabels[entry.kind]}</span>
         <span className="tone">{entry.tone}</span>
