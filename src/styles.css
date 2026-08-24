@@ -25,6 +25,7 @@
   --hairline: rgba(255,255,255,.09);
   --rim: inset 0 1px 1px rgba(255,255,255,.13), inset 0 -1px 1px rgba(255,255,255,.065), inset 1px 0 1px rgba(255,255,255,.045), inset -1px 0 1px rgba(255,255,255,.045);
   --shadow: 0 24px 70px rgba(0,0,0,.32);
+  --settings-surface: var(--glass);
   --page: min(1180px, calc(100vw - 40px));
   --ctl-h: 40px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -42,6 +43,7 @@
   --hairline: rgba(255,255,255,.52);
   --rim: inset 0 1px 1px rgba(255,255,255,.52), inset 0 -1px 1px rgba(255,255,255,.26), inset 1px 0 1px rgba(255,255,255,.18), inset -1px 0 1px rgba(255,255,255,.18);
   --shadow: 0 24px 70px rgba(62,48,77,.14);
+  --settings-surface: linear-gradient(145deg,rgba(255,255,255,.88),rgba(245,242,248,.78));
 }
 
 * { box-sizing: border-box; }
@@ -222,6 +224,9 @@ main { width: var(--page); margin: 0 auto; padding: 68px 0 90px; min-height: cal
 .detail-panel__share { width: 100%; margin-top: 26px; }
 .panel-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
 .panel-heading h2 { margin: 0; font-family: "DM Serif Display",Georgia,serif; font-size: 42px; font-weight: 400; }
+.settings-panel { background: var(--settings-surface); }
+:root[data-theme="light"] .modal-layer { background: rgba(35,28,40,.26); }
+:root[data-theme="light"] .settings-panel { --muted: #5b5662; --muted-strong: #403a47; border-color: rgba(255,255,255,.88); box-shadow: var(--rim),0 28px 80px rgba(48,38,55,.2); }
 .settings-panel fieldset { min-width: 0; margin: 28px 0 0; padding: 0; border: 0; }
 .settings-panel legend { color: var(--muted-strong); font-size: 12px; font-weight: 700; }
 .segmented { margin-top: 10px; padding: 4px; border: 1px solid var(--hairline); border-radius: 14px; background: var(--inner); display: grid; grid-template-columns: repeat(3,1fr); }
