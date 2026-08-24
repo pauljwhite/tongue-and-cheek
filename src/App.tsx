@@ -104,7 +104,7 @@ function App() {
         {section === 'today' && (
           <section className="today-layout">
             <div className="hero-copy">
-              <p className="eyebrow">Today’s Britishism</p>
+              <p className="eyebrow">Word of the day</p>
               <h1>A little less<br /><span>lost in translation.</span></h1>
               <p>One gloriously British expression a day, decoded for American ears.</p>
             </div>
