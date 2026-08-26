@@ -6,8 +6,10 @@ import { EntryDetail } from './components/EntryDetail'
 import { Icon } from './components/Icon'
 import { InstallGuide } from './components/InstallGuide'
 import { Settings } from './components/Settings'
+import { Welcome } from './components/Welcome'
 import { applyPreferences, loadPreferences, type Preferences } from './lib/preferences'
 import { dailyEntry, filterExplicitEntries, filterExplicitOnlyEntries, kindLabels, refreshedDailyEntry, searchEntries } from './lib/terms'
+import { hasSeenWelcome, markWelcomeSeen } from './lib/welcome'
 import type { AppSection, Britishism, EntryKind } from './types'
 import './styles.css'
 
@@ -32,7 +34,9 @@ function App() {
   const [visibleCount, setVisibleCount] = useState(RESULTS_PAGE_SIZE)
   const [refreshedToday, setRefreshedToday] = useState<Britishism>()
   const [preferences, setPreferences] = useState<Preferences>(loadPreferences)
+  const [welcomePending, setWelcomePending] = useState(() => !hasSeenWelcome())
   const visibleEntries = useMemo(() => filterExplicitEntries(entries, preferences.includeExplicit), [entries, preferences.includeExplicit])
+  const explicitCount = useMemo(() => entries.filter((entry) => entry.explicit).length, [entries])
   const browseEntries = useMemo(() => filterExplicitOnlyEntries(visibleEntries, explicitOnly), [visibleEntries, explicitOnly])
   const scheduledToday = useMemo(() => dailyEntry(visibleEntries), [visibleEntries])
   const today = refreshedToday && visibleEntries.includes(refreshedToday) ? refreshedToday : scheduledToday
@@ -88,6 +92,11 @@ function App() {
   const updatePreferences = (next: Preferences) => {
     setPreferences(next)
     if (!next.includeExplicit) setExplicitOnly(false)
+  }
+
+  const completeWelcome = () => {
+    markWelcomeSeen()
+    setWelcomePending(false)
   }
 
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || Boolean((navigator as Navigator & { standalone?: boolean }).standalone)
@@ -163,6 +172,7 @@ function App() {
       {selected && <EntryDetail entry={selected} onClose={closeEntry} />}
       {showSettings && <Settings preferences={preferences} onChange={updatePreferences} onClose={() => setShowSettings(false)} onInstall={() => { setShowSettings(false); setShowInstall(true) }} />}
       {showInstall && <InstallGuide onClose={() => setShowInstall(false)} />}
+      {welcomePending && !loading && entries.length > 0 && <Welcome totalCount={entries.length} explicitCount={explicitCount} includeExplicit={preferences.includeExplicit} onExplicitChange={(includeExplicit) => updatePreferences({ ...preferences, includeExplicit })} onComplete={completeWelcome} />}
     </div>
   )
 }
