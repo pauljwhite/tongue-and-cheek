@@ -113,7 +113,6 @@ function App() {
 
             <div className="quick-actions">
               <button className="glass-card" onClick={() => switchSection('browse')}><span className="action-orb"><Icon name="search" /></span><span><strong>Find a Britishism</strong><small>Search all {entries.length} translations</small></span><Icon name="chevron" /></button>
-              {!isStandalone && <button className="glass-card" onClick={() => setShowInstall(true)}><span className="action-orb action-orb--phone"><Icon name="phone" /></span><span><strong>Keep it on your iPhone</strong><small>Add it to your Home Screen</small></span><Icon name="chevron" /></button>}
             </div>
 
             <section className="taste-section">
@@ -122,6 +121,8 @@ function App() {
                 {entries.filter((entry) => entry.id !== today?.id).slice(0, 6).map((entry) => <EntryCard key={entry.id} entry={entry} onOpen={() => openEntry(entry)} />)}
               </div>
             </section>
+
+            {!isStandalone && <button className="mobile-install-cta glass-card" onClick={() => setShowInstall(true)}><span className="action-orb action-orb--phone"><Icon name="phone" /></span><span><strong>Keep it on your iPhone</strong><small>Add it to your Home Screen</small></span><Icon name="chevron" /></button>}
           </section>
         )}
 

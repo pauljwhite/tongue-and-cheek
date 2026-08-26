@@ -129,12 +129,14 @@ main { width: var(--page); margin: 0 auto; padding: 68px 0 90px; min-height: cal
 @keyframes pulse { to { background-position: -140% 0; } }
 
 .quick-actions { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
-.quick-actions > button { min-height: 84px; padding: 14px 18px; border-radius: 22px; color: var(--text); text-align: left; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: transform .2s ease; }
-.quick-actions > button:hover { transform: translateY(-2px); }
-.quick-actions > button > span:nth-child(2) { min-width: 0; display: grid; gap: 3px; }
-.quick-actions strong { font-size: 14px; }
-.quick-actions small { color: var(--muted); font-size: 12px; }
-.quick-actions > button > svg { width: 17px; margin-left: auto; fill: none; stroke: var(--muted); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.quick-actions > button, .mobile-install-cta { min-height: 84px; padding: 14px 18px; border-radius: 22px; color: var(--text); text-align: left; align-items: center; gap: 14px; cursor: pointer; transition: transform .2s ease; }
+.quick-actions > button { display: flex; }
+.quick-actions > button:hover, .mobile-install-cta:hover { transform: translateY(-2px); }
+.quick-actions > button > span:nth-child(2), .mobile-install-cta > span:nth-child(2) { min-width: 0; display: grid; gap: 3px; }
+.quick-actions strong, .mobile-install-cta strong { font-size: 14px; }
+.quick-actions small, .mobile-install-cta small { color: var(--muted); font-size: 12px; }
+.quick-actions > button > svg, .mobile-install-cta > svg { width: 17px; margin-left: auto; fill: none; stroke: var(--muted); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.mobile-install-cta { display: none; }
 .action-orb { width: 48px; height: 48px; border-radius: 50%; flex: 0 0 auto; display: grid; place-items: center; color: white; background: radial-gradient(circle at 30% 20%,hsl(var(--accent-h) var(--accent-s) 84%),var(--accent) 40%,hsl(var(--accent-h) var(--accent-s) 38%)); box-shadow: inset 0 1px 2px rgba(255,255,255,.55), 0 10px 24px hsl(var(--accent-h) var(--accent-s) 20% / .28); }
 .action-orb--phone { --accent-h: 212; }
 .action-orb svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
@@ -296,6 +298,7 @@ footer button { margin-left: auto; border: 0; background: none; color: var(--mut
   .quick-actions { grid-template-columns: 1fr; gap: 11px; margin-top: 14px; }
   .quick-actions > button { min-height: 76px; border-radius: 20px; }
   .taste-section { margin-top: 72px; }
+  .mobile-install-cta { grid-column: 1 / -1; display: flex; width: 100%; margin-top: 30px; min-height: 82px; border-radius: 22px; }
   .section-heading { align-items: center; }
   .section-heading h2 { font-size: 32px; }
   .section-heading .eyebrow { font-size: 10px; }

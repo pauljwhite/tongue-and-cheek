@@ -6,7 +6,7 @@ const cssName = assets.find((name) => name.endsWith('.css'))
 if (!cssName) throw new Error('Production build contains no CSS asset')
 
 const css = await readFile(join('dist/assets', cssName), 'utf8')
-for (const required of ['backdrop-filter:', '-webkit-backdrop-filter:', 'safe-area-inset-bottom', '--glass-a', '--settings-surface']) {
+for (const required of ['backdrop-filter:', '-webkit-backdrop-filter:', 'safe-area-inset-bottom', '--glass-a', '--settings-surface', '.mobile-install-cta']) {
   if (!css.includes(required)) throw new Error(`Built CSS is missing ${required}`)
 }
 
