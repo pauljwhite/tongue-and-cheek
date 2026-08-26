@@ -108,7 +108,7 @@ function App() {
               <p>One gloriously British expression a day, decoded for American ears.</p>
             </div>
             <div className="featured-entry" aria-live="polite">
-              {loading ? <div className="entry-card entry-card--featured glass-card skeleton" aria-label="Loading today’s term" /> : today && <><EntryCard key={today.id} entry={today} onOpen={() => openEntry(today)} featured /><button className="daily-refresh glass-card" onClick={() => setRefreshedToday(refreshedDailyEntry(entries, today.id))}><Icon name="refresh" /><span><strong>Another, please</strong><small>Show me a different Britishism</small></span></button></>}
+              {loading ? <div className="entry-card entry-card--featured glass-card skeleton" aria-label="Loading today’s term" /> : today && <EntryCard key={today.id} entry={today} onOpen={() => openEntry(today)} onRefresh={() => setRefreshedToday(refreshedDailyEntry(entries, today.id))} featured />}
             </div>
 
             <div className="quick-actions">
