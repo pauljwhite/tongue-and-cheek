@@ -30,6 +30,7 @@ for (const [index, entry] of entries.entries()) {
   if (!Array.isArray(entry?.regions) || entry.regions.length === 0) errors.push(`${label}: include at least one region.`)
   if (!Array.isArray(entry?.tags) || entry.tags.length === 0) errors.push(`${label}: include at least one search tag.`)
   if (typeof entry?.dailyEligible !== 'boolean') errors.push(`${label}: dailyEligible must be true or false.`)
+  if (entry?.explicit !== undefined && typeof entry.explicit !== 'boolean') errors.push(`${label}: explicit must be true or false when supplied.`)
 }
 
 if (errors.length) {

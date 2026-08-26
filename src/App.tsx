@@ -7,7 +7,7 @@ import { Icon } from './components/Icon'
 import { InstallGuide } from './components/InstallGuide'
 import { Settings } from './components/Settings'
 import { applyPreferences, loadPreferences, type Preferences } from './lib/preferences'
-import { dailyEntry, kindLabels, refreshedDailyEntry, searchEntries } from './lib/terms'
+import { dailyEntry, filterExplicitEntries, kindLabels, refreshedDailyEntry, searchEntries } from './lib/terms'
 import type { AppSection, Britishism, EntryKind } from './types'
 import './styles.css'
 
@@ -31,9 +31,10 @@ function App() {
   const [visibleCount, setVisibleCount] = useState(RESULTS_PAGE_SIZE)
   const [refreshedToday, setRefreshedToday] = useState<Britishism>()
   const [preferences, setPreferences] = useState<Preferences>(loadPreferences)
-  const scheduledToday = useMemo(() => dailyEntry(entries), [entries])
-  const today = refreshedToday ?? scheduledToday
-  const results = useMemo(() => searchEntries(entries, query, kind), [entries, query, kind])
+  const visibleEntries = useMemo(() => filterExplicitEntries(entries, preferences.includeExplicit), [entries, preferences.includeExplicit])
+  const scheduledToday = useMemo(() => dailyEntry(visibleEntries), [visibleEntries])
+  const today = refreshedToday && visibleEntries.includes(refreshedToday) ? refreshedToday : scheduledToday
+  const results = useMemo(() => searchEntries(visibleEntries, query, kind), [visibleEntries, query, kind])
   const visibleResults = results.slice(0, visibleCount)
 
   useEffect(() => {
@@ -60,12 +61,12 @@ function App() {
   useEffect(() => {
     const openFromHash = () => {
       const match = window.location.hash.match(/^#entry\/(.+)$/)
-      setSelected(match ? entries.find((entry) => entry.id === decodeURIComponent(match[1])) : undefined)
+      setSelected(match ? visibleEntries.find((entry) => entry.id === decodeURIComponent(match[1])) : undefined)
     }
     openFromHash()
     window.addEventListener('hashchange', openFromHash)
     return () => window.removeEventListener('hashchange', openFromHash)
-  }, [entries])
+  }, [visibleEntries])
 
   const openEntry = (entry: Britishism) => {
     setSelected(entry)
@@ -108,17 +109,17 @@ function App() {
               <p>One gloriously British expression a day, decoded for American ears.</p>
             </div>
             <div className="featured-entry" aria-live="polite">
-              {loading ? <div className="entry-card entry-card--featured glass-card skeleton" aria-label="Loading today’s term" /> : today && <EntryCard key={today.id} entry={today} onOpen={() => openEntry(today)} onRefresh={() => setRefreshedToday(refreshedDailyEntry(entries, today.id))} featured />}
+              {loading ? <div className="entry-card entry-card--featured glass-card skeleton" aria-label="Loading today’s term" /> : today && <EntryCard key={today.id} entry={today} onOpen={() => openEntry(today)} onRefresh={() => setRefreshedToday(refreshedDailyEntry(visibleEntries, today.id))} featured />}
             </div>
 
             <div className="quick-actions">
-              <button className="glass-card" onClick={() => switchSection('browse')}><span className="action-orb"><Icon name="search" /></span><span><strong>Find a Britishism</strong><small>Search all {entries.length} translations</small></span><Icon name="chevron" /></button>
+              <button className="glass-card" onClick={() => switchSection('browse')}><span className="action-orb"><Icon name="search" /></span><span><strong>Find a Britishism</strong><small>Search all {visibleEntries.length} translations</small></span><Icon name="chevron" /></button>
             </div>
 
             <section className="taste-section">
               <div className="section-heading"><div><p className="eyebrow">More splendid nonsense</p><h2>Worth knowing</h2></div><button onClick={() => switchSection('browse')}>See all <Icon name="chevron" /></button></div>
               <div className="entry-grid entry-grid--preview">
-                {entries.filter((entry) => entry.id !== today?.id).slice(0, 6).map((entry) => <EntryCard key={entry.id} entry={entry} onOpen={() => openEntry(entry)} />)}
+                {visibleEntries.filter((entry) => entry.id !== today?.id).slice(0, 6).map((entry) => <EntryCard key={entry.id} entry={entry} onOpen={() => openEntry(entry)} />)}
               </div>
             </section>
 

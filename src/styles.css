@@ -242,6 +242,16 @@ main { width: var(--page); margin: 0 auto; padding: 68px 0 90px; min-height: cal
 .range-label, .range-ends { display: flex; justify-content: space-between; align-items: center; }
 .range-label span, .range-ends { color: var(--muted); font-size: 11px; }
 .settings-panel input[type="range"] { width: 100%; margin: 14px 0 6px; accent-color: var(--accent); }
+.settings-toggle { position: relative; margin-top: 10px; padding: 13px 14px; border: 1px solid var(--hairline); border-radius: 14px; background: var(--inner); display: flex; align-items: center; gap: 14px; cursor: pointer; }
+.settings-toggle > span:first-child { min-width: 0; flex: 1; display: grid; gap: 3px; }
+.settings-toggle strong { color: var(--text); font-size: 13px; }
+.settings-toggle small { color: var(--muted); font-size: 11px; line-height: 1.35; }
+.settings-toggle input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.toggle-track { position: relative; width: 42px; height: 24px; flex: 0 0 auto; border: 1px solid var(--hairline); border-radius: 999px; background: var(--muted); transition: background .18s ease; }
+.toggle-track > span { position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: white; box-shadow: 0 2px 5px rgba(0,0,0,.25); transition: transform .18s ease; }
+.settings-toggle input:checked + .toggle-track { background: var(--accent); }
+.settings-toggle input:checked + .toggle-track > span { transform: translateX(18px); }
+.settings-toggle:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
 .settings-panel__install { width: 100%; margin-top: 30px; }
 .install-panel { text-align: center; }
 .install-panel > .brand-mark { margin: 0 auto 15px; }

@@ -53,6 +53,15 @@ export function Settings({ preferences, onChange, onClose, onInstall }: {
           <div className="range-ends"><span>Solid</span><span>Glassiest</span></div>
         </fieldset>
 
+        <fieldset>
+          <legend>Content</legend>
+          <label className="settings-toggle">
+            <span><strong>18+ Include explicit terms</strong><small>Show strong language and adult slang</small></span>
+            <input type="checkbox" checked={preferences.includeExplicit} onChange={(event) => onChange({ ...preferences, includeExplicit: event.target.checked })} />
+            <span className="toggle-track" aria-hidden="true"><span /></span>
+          </label>
+        </fieldset>
+
         <button className="secondary-button settings-panel__install" onClick={onInstall}><Icon name="phone" /> Add to iPhone Home Screen</button>
       </section>
     </div>

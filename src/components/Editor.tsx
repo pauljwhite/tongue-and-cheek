@@ -16,6 +16,7 @@ const blank = (): Britishism => ({
   tone: 'informal',
   tags: [],
   dailyEligible: true,
+  explicit: false,
 })
 
 export function Editor({ entries, onSaved }: { entries: Britishism[]; onSaved: (entry: Britishism) => void }) {
@@ -98,6 +99,7 @@ export function Editor({ entries, onSaved }: { entries: Britishism[]; onSaved: (
           <label>Region<input value={entry.regions.join(', ')} onChange={(event) => update('regions', event.target.value.split(',').map((value) => value.trim()).filter(Boolean))} placeholder="UK-wide" /></label>
           <label>Tags<input value={entry.tags.join(', ')} onChange={(event) => update('tags', event.target.value.split(',').map((value) => value.trim()).filter(Boolean))} placeholder="money, euphemism" /></label>
           <label className="check-label form-span"><input type="checkbox" checked={entry.dailyEligible} onChange={(event) => update('dailyEligible', event.target.checked)} /> Include in Today’s Britishism</label>
+          <label className="check-label form-span"><input type="checkbox" checked={entry.explicit ?? false} onChange={(event) => update('explicit', event.target.checked)} /> Mark as 18+ explicit</label>
         </div>
 
         {status.message && <p className={`form-status form-status--${status.type}`}>{status.message}</p>}

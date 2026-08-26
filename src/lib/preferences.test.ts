@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { glassValues, hexToAccent } from './preferences'
+import { glassValues, hexToAccent, loadPreferences } from './preferences'
 
 describe('glass preferences', () => {
   it('makes the right-hand end clearer and less blurred', () => {
@@ -10,5 +10,12 @@ describe('glass preferences', () => {
 
   it('converts custom colours into the shared HSL system', () => {
     expect(hexToAccent('#ff0000')).toMatchObject({ name: 'Custom', h: 0, s: 100, l: 50 })
+  })
+})
+
+describe('content preferences', () => {
+  it('keeps explicit terms off by default', () => {
+    localStorage.clear()
+    expect(loadPreferences().includeExplicit).toBe(false)
   })
 })

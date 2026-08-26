@@ -11,7 +11,7 @@ npm run dev
 
 Run `npm test`, `npm run lint`, and `npm run build` before publishing.
 
-The test command validates every entry's required fields, URL-safe ID, type, pronunciation, regions, tags, and daily eligibility. It also blocks duplicate IDs and terms.
+The test command validates every entry's required fields, URL-safe ID, type, pronunciation, regions, tags, daily eligibility, and optional explicit-content marker. It also blocks duplicate IDs and terms.
 
 ## Adding entries
 
@@ -26,6 +26,8 @@ The store uses concise original definitions written for an American reader. Regi
 The expansion was cross-checked against:
 
 - [Cambridge Dictionary's guide to British slang](https://dictionary.cambridge.org/grammar/british-grammar/slang)
+- Cambridge Dictionary definitions for [bellend](https://dictionary.cambridge.org/dictionary/english/bellend), [twat](https://dictionary.cambridge.org/dictionary/english/twat), [minge](https://dictionary.cambridge.org/dictionary/english/minge), [arse](https://dictionary.cambridge.org/dictionary/english/arse), [scrubber](https://dictionary.cambridge.org/dictionary/english/scrubber), and [bloody hell](https://dictionary.cambridge.org/dictionary/english/bloody-hell)
+- Collins Dictionary definitions for [knobhead](https://www.collinsdictionary.com/dictionary/english/knobhead) and [baps](https://www.collinsdictionary.com/dictionary/english/baps)
 - [British Council's starter guide to UK slang](https://www.britishcouncil.org/voices-magazine/youre-having-giraffe-starter-guide-uk-slang) and [idioms collection](https://learnenglish.britishcouncil.org/learning-hub/topics/idioms-expressions)
 - [Dictionaries of the Scots Language](https://dsl.ac.uk/our-publications/scots-english/)
 - [Newcastle University's Geordie guide](https://belong.ncl.ac.uk/blog/geordie-dictionary-guide)

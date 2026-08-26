@@ -12,6 +12,7 @@ export interface Preferences {
   theme: ThemeChoice
   accent: AccentChoice
   glass: number
+  includeExplicit: boolean
 }
 
 export const accents: AccentChoice[] = [
@@ -25,7 +26,7 @@ export const accents: AccentChoice[] = [
 ]
 
 const KEY = 'tongue-cheek-preferences'
-const fallback: Preferences = { theme: 'system', accent: accents[5], glass: 72 }
+const fallback: Preferences = { theme: 'system', accent: accents[5], glass: 72, includeExplicit: false }
 
 export function loadPreferences(): Preferences {
   try {

@@ -15,6 +15,7 @@ export interface Britishism {
   tone: string
   tags: string[]
   dailyEligible: boolean
+  explicit?: boolean
 }
 
 export type AppSection = 'today' | 'browse' | 'add'

@@ -23,6 +23,10 @@ export function refreshedDailyEntry(entries: Britishism[], currentId?: string, r
   return eligible[Math.floor(random() * eligible.length)]
 }
 
+export function filterExplicitEntries(entries: Britishism[], includeExplicit: boolean): Britishism[] {
+  return includeExplicit ? entries : entries.filter((entry) => !entry.explicit)
+}
+
 export function searchEntries(entries: Britishism[], query: string, kind: EntryKind | 'all'): Britishism[] {
   const needle = query.trim().toLocaleLowerCase('en-GB')
   return entries
