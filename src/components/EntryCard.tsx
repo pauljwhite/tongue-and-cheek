@@ -14,7 +14,10 @@ function CardContent({ entry, featured }: { entry: Britishism; featured: boolean
     <>
       {featured && <span className="entry-card__daily-label">Today’s Britishism</span>}
       <span className="entry-card__topline">
-        <span className={`kind kind--${entry.kind}`}>{kindLabels[entry.kind]}</span>
+        <span className="entry-card__badges">
+          <span className={`kind kind--${entry.kind}`}>{kindLabels[entry.kind]}</span>
+          {entry.explicit && <span className="explicit-badge">18+</span>}
+        </span>
         <span className="tone">{entry.tone}</span>
       </span>
       <strong>{entry.term}</strong>

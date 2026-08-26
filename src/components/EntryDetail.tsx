@@ -38,7 +38,10 @@ export function EntryDetail({ entry, onClose }: { entry: Britishism; onClose: ()
     <div className="modal-layer" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
       <article className="detail-panel glass-card" role="dialog" aria-modal="true" aria-labelledby="entry-title">
         <button className="icon-button detail-panel__close" onClick={onClose} aria-label="Close"><Icon name="close" /></button>
-        <span className={`kind kind--${entry.kind}`}>{kindLabels[entry.kind]}</span>
+        <div className="entry-badges">
+          <span className={`kind kind--${entry.kind}`}>{kindLabels[entry.kind]}</span>
+          {entry.explicit && <span className="explicit-badge">18+</span>}
+        </div>
         <h2 id="entry-title">{entry.term}</h2>
         <div className="pronunciation-line">
           <button className="listen-button" onClick={speak}><Icon name="volume" /> Listen</button>

@@ -102,7 +102,10 @@ main { width: var(--page); margin: 0 auto; padding: 68px 0 90px; min-height: cal
 .entry-card:hover { transform: translateY(-3px); border-color: var(--accent-line); }
 .entry-card > * { position: relative; z-index: 1; }
 .entry-card__topline { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+.entry-card__badges, .entry-badges { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .kind { display: inline-flex; align-items: center; height: 27px; padding: 0 10px; border: 1px solid var(--accent-line); border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.explicit-badge { display: inline-flex; align-items: center; height: 27px; padding: 0 9px; border: 1px solid hsl(350 86% 68% / .42); border-radius: 999px; background: hsl(350 86% 60% / .14); color: hsl(350 92% 74%); font-size: 10px; font-weight: 800; letter-spacing: .08em; }
+:root[data-theme="light"] .explicit-badge { border-color: hsl(350 68% 38% / .32); background: hsl(350 70% 48% / .1); color: hsl(350 68% 34%); }
 .kind--pronunciation { --accent-h: 212; }
 .kind--proverb { --accent-h: 38; }
 .kind--colloquialism { --accent-h: 174; }

@@ -31,4 +31,14 @@ describe('featured EntryCard', () => {
     expect(onRefresh).toHaveBeenCalledOnce()
     expect(onOpen).not.toHaveBeenCalled()
   })
+
+  it('places an 18+ badge after the kind badge for explicit entries', () => {
+    const { container } = render(<EntryCard entry={{ ...entry, explicit: true }} onOpen={vi.fn()} />)
+    expect(container.querySelector('.entry-card__badges')?.textContent).toBe('Slang18+')
+  })
+
+  it('does not label standard entries as 18+', () => {
+    const { container } = render(<EntryCard entry={entry} onOpen={vi.fn()} />)
+    expect(container.querySelector('.explicit-badge')).toBeNull()
+  })
 })
