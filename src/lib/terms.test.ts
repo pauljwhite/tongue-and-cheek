@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Britishism } from '../types'
-import { dailyEntry, filterExplicitEntries, refreshedDailyEntry, searchEntries, slugify, validateEntry } from './terms'
+import { dailyEntry, filterExplicitEntries, filterExplicitOnlyEntries, refreshedDailyEntry, searchEntries, slugify, validateEntry } from './terms'
 
 const entry = (id: string, term = id): Britishism => ({
   id, term, kind: 'slang', meaning: `Meaning of ${term}`, americanEquivalent: 'Equivalent', example: 'Example',
@@ -41,6 +41,7 @@ describe('explicit content filter', () => {
 
   it('hides explicit terms by default', () => expect(filterExplicitEntries([clean, explicit], false)).toEqual([clean]))
   it('includes explicit terms when enabled', () => expect(filterExplicitEntries([clean, explicit], true)).toEqual([clean, explicit]))
+  it('can narrow an enabled collection to explicit terms only', () => expect(filterExplicitOnlyEntries([clean, explicit], true)).toEqual([explicit]))
 })
 
 describe('editor helpers', () => {

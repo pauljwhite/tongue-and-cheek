@@ -7,7 +7,7 @@ import { Icon } from './components/Icon'
 import { InstallGuide } from './components/InstallGuide'
 import { Settings } from './components/Settings'
 import { applyPreferences, loadPreferences, type Preferences } from './lib/preferences'
-import { dailyEntry, filterExplicitEntries, kindLabels, refreshedDailyEntry, searchEntries } from './lib/terms'
+import { dailyEntry, filterExplicitEntries, filterExplicitOnlyEntries, kindLabels, refreshedDailyEntry, searchEntries } from './lib/terms'
 import type { AppSection, Britishism, EntryKind } from './types'
 import './styles.css'
 
@@ -25,6 +25,7 @@ function App() {
   const [section, setSection] = useState<AppSection>('today')
   const [query, setQuery] = useState('')
   const [kind, setKind] = useState<EntryKind | 'all'>('all')
+  const [explicitOnly, setExplicitOnly] = useState(false)
   const [selected, setSelected] = useState<Britishism>()
   const [showSettings, setShowSettings] = useState(false)
   const [showInstall, setShowInstall] = useState(false)
@@ -32,9 +33,10 @@ function App() {
   const [refreshedToday, setRefreshedToday] = useState<Britishism>()
   const [preferences, setPreferences] = useState<Preferences>(loadPreferences)
   const visibleEntries = useMemo(() => filterExplicitEntries(entries, preferences.includeExplicit), [entries, preferences.includeExplicit])
+  const browseEntries = useMemo(() => filterExplicitOnlyEntries(visibleEntries, explicitOnly), [visibleEntries, explicitOnly])
   const scheduledToday = useMemo(() => dailyEntry(visibleEntries), [visibleEntries])
   const today = refreshedToday && visibleEntries.includes(refreshedToday) ? refreshedToday : scheduledToday
-  const results = useMemo(() => searchEntries(visibleEntries, query, kind), [visibleEntries, query, kind])
+  const results = useMemo(() => searchEntries(browseEntries, query, kind), [browseEntries, query, kind])
   const visibleResults = results.slice(0, visibleCount)
 
   useEffect(() => {
@@ -81,6 +83,11 @@ function App() {
   const switchSection = (next: AppSection) => {
     setSection(next)
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const updatePreferences = (next: Preferences) => {
+    setPreferences(next)
+    if (!next.includeExplicit) setExplicitOnly(false)
   }
 
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || Boolean((navigator as Navigator & { standalone?: boolean }).standalone)
@@ -133,8 +140,9 @@ function App() {
             <div className="search-panel glass-card">
               <label className="search-box"><Icon name="search" /><input type="search" value={query} onChange={(event) => { setQuery(event.target.value); setVisibleCount(RESULTS_PAGE_SIZE) }} placeholder="Try ‘exhausted’ or ‘dodgy’" aria-label="Search Britishisms" />{query && <button onClick={() => { setQuery(''); setVisibleCount(RESULTS_PAGE_SIZE) }} aria-label="Clear search"><Icon name="close" /></button>}</label>
               <div className="filter-row" aria-label="Filter by type">
-                <button className={kind === 'all' ? 'is-active' : ''} onClick={() => { setKind('all'); setVisibleCount(RESULTS_PAGE_SIZE) }}>Everything</button>
-                {(Object.keys(kindLabels) as EntryKind[]).map((key) => <button key={key} className={kind === key ? 'is-active' : ''} onClick={() => { setKind(key); setVisibleCount(RESULTS_PAGE_SIZE) }}>{kindLabels[key]}</button>)}
+                <button className={kind === 'all' && !explicitOnly ? 'is-active' : ''} onClick={() => { setKind('all'); setExplicitOnly(false); setVisibleCount(RESULTS_PAGE_SIZE) }}>Everything</button>
+                {preferences.includeExplicit && <button className={`explicit-filter ${explicitOnly ? 'is-active' : ''}`} aria-pressed={explicitOnly} onClick={() => { setKind('all'); setExplicitOnly(true); setVisibleCount(RESULTS_PAGE_SIZE) }}>18+</button>}
+                {(Object.keys(kindLabels) as EntryKind[]).map((key) => <button key={key} className={kind === key && !explicitOnly ? 'is-active' : ''} onClick={() => { setKind(key); setExplicitOnly(false); setVisibleCount(RESULTS_PAGE_SIZE) }}>{kindLabels[key]}</button>)}
               </div>
             </div>
             <div className="results-heading"><strong>{results.length}</strong> {results.length === 1 ? 'translation' : 'translations'}</div>
@@ -153,7 +161,7 @@ function App() {
       </nav>
 
       {selected && <EntryDetail entry={selected} onClose={closeEntry} />}
-      {showSettings && <Settings preferences={preferences} onChange={setPreferences} onClose={() => setShowSettings(false)} onInstall={() => { setShowSettings(false); setShowInstall(true) }} />}
+      {showSettings && <Settings preferences={preferences} onChange={updatePreferences} onClose={() => setShowSettings(false)} onInstall={() => { setShowSettings(false); setShowInstall(true) }} />}
       {showInstall && <InstallGuide onClose={() => setShowInstall(false)} />}
     </div>
   )

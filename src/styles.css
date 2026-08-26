@@ -166,6 +166,10 @@ main { width: var(--page); margin: 0 auto; padding: 68px 0 90px; min-height: cal
 .filter-row::-webkit-scrollbar { display: none; }
 .filter-row button { height: 34px; padding: 0 14px; border: 1px solid transparent; border-radius: 12px; background: transparent; color: var(--muted); white-space: nowrap; cursor: pointer; }
 .filter-row button.is-active { color: var(--text); border-color: var(--accent-line); background: var(--accent-soft); }
+.filter-row button.explicit-filter { color: hsl(350 92% 74%); border-color: hsl(350 86% 68% / .28); background: hsl(350 86% 60% / .08); }
+.filter-row button.explicit-filter.is-active { color: #fff; border-color: hsl(350 86% 76% / .52); background: hsl(350 72% 50% / .72); }
+:root[data-theme="light"] .filter-row button.explicit-filter { color: hsl(350 68% 34%); border-color: hsl(350 68% 38% / .22); background: hsl(350 70% 48% / .07); }
+:root[data-theme="light"] .filter-row button.explicit-filter.is-active { color: #fff; border-color: hsl(350 68% 34% / .3); background: hsl(350 66% 43% / .88); }
 .results-heading { margin: 32px 0 14px; color: var(--muted); font-size: 13px; }
 .results-heading strong { color: var(--text); }
 .load-more { display: flex; justify-content: center; padding-top: 28px; }

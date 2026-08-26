@@ -27,6 +27,10 @@ export function filterExplicitEntries(entries: Britishism[], includeExplicit: bo
   return includeExplicit ? entries : entries.filter((entry) => !entry.explicit)
 }
 
+export function filterExplicitOnlyEntries(entries: Britishism[], explicitOnly: boolean): Britishism[] {
+  return explicitOnly ? entries.filter((entry) => entry.explicit) : entries
+}
+
 export function searchEntries(entries: Britishism[], query: string, kind: EntryKind | 'all'): Britishism[] {
   const needle = query.trim().toLocaleLowerCase('en-GB')
   return entries
