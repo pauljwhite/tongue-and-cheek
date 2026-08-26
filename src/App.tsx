@@ -35,6 +35,7 @@ function App() {
   const [refreshedToday, setRefreshedToday] = useState<Britishism>()
   const [preferences, setPreferences] = useState<Preferences>(loadPreferences)
   const [welcomePending, setWelcomePending] = useState(() => !hasSeenWelcome())
+  const [welcomeIncludeExplicit, setWelcomeIncludeExplicit] = useState(false)
   const visibleEntries = useMemo(() => filterExplicitEntries(entries, preferences.includeExplicit), [entries, preferences.includeExplicit])
   const explicitCount = useMemo(() => entries.filter((entry) => entry.explicit).length, [entries])
   const browseEntries = useMemo(() => filterExplicitOnlyEntries(visibleEntries, explicitOnly), [visibleEntries, explicitOnly])
@@ -95,6 +96,7 @@ function App() {
   }
 
   const completeWelcome = () => {
+    updatePreferences({ ...preferences, includeExplicit: welcomeIncludeExplicit })
     markWelcomeSeen()
     setWelcomePending(false)
   }
@@ -172,7 +174,7 @@ function App() {
       {selected && <EntryDetail entry={selected} onClose={closeEntry} />}
       {showSettings && <Settings preferences={preferences} onChange={updatePreferences} onClose={() => setShowSettings(false)} onInstall={() => { setShowSettings(false); setShowInstall(true) }} />}
       {showInstall && <InstallGuide onClose={() => setShowInstall(false)} />}
-      {welcomePending && !loading && entries.length > 0 && <Welcome totalCount={entries.length} explicitCount={explicitCount} includeExplicit={preferences.includeExplicit} onExplicitChange={(includeExplicit) => updatePreferences({ ...preferences, includeExplicit })} onComplete={completeWelcome} />}
+      {welcomePending && !loading && entries.length > 0 && <Welcome totalCount={entries.length} explicitCount={explicitCount} includeExplicit={welcomeIncludeExplicit} onExplicitChange={setWelcomeIncludeExplicit} onComplete={completeWelcome} />}
     </div>
   )
 }

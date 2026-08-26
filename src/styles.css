@@ -358,6 +358,7 @@ footer button { margin-left: auto; border: 0; background: none; color: var(--mut
   .form-status { margin-inline: 18px; }
   .editor-save { margin: 0 18px 20px; width: calc(100% - 36px); }
   .modal-layer { padding-inline: 10px; place-items: end center; }
+  .welcome-layer { place-items: center; }
   .detail-panel, .settings-panel, .install-panel, .welcome-panel { width: 100%; max-height: calc(100dvh - max(12px,env(safe-area-inset-top))); padding: 26px 20px calc(24px + var(--safe-bottom)); border-radius: 28px 28px 18px 18px; }
   .welcome-panel__mark { top: 21px; right: 20px; }
   .welcome-panel__mark .brand-mark { width: 53px; height: 53px; }

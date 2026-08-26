@@ -9,6 +9,7 @@ describe('Welcome', () => {
     expect(screen.getByRole('dialog', { name: 'Welcome to the proper side of English.' })).toHaveTextContent('344 glorious British terms')
     expect(screen.getByRole('dialog')).toHaveTextContent('22 gloriously rude entries')
     expect(screen.getByText('Come in, the kettle’s on')).toBeInTheDocument()
+    expect(screen.getByRole('checkbox', { name: /Include explicit terms/i })).not.toBeChecked()
   })
 
   it('lets the visitor opt into explicit terms and complete the welcome', () => {
